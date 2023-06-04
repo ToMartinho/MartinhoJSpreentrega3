@@ -17,8 +17,7 @@
 }
 
 .formulario input{
-    width: 180px;
-    margin: 0px 10px;
+    width: 250px;
 }
 
 .formulario input, .formulario textarea{
@@ -40,7 +39,7 @@
     color: white;
 }
 
-/* FORMATO DE LA TALA */
+/* FORMATO DE LA TABLA */
 
 .tabla{
     width: 85%;

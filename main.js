@@ -78,18 +78,25 @@ function verificarReserva(reservas,dia,horario){
     }
     
 }
-
-// se crea funcion para cancelar la reserva
-const cancelarReserva=(dni)=>{
-    const index = reservas.findIndex((reserva)=> reserva.dni == dni);
-    if(index != -1){
-        reservas.splice(index,1);
-        alert("su reserva a sido cancelada exitosamente");
-    }else{
-        alert("el dni ingresado no posee ninguna reserva");
-    }
-}
 */
+// se crea funcion para cancelar la reserva
+const cancelarReserva=()=>{
+    const eliminarReserva = document.querySelector("#eliminarReserva");
+    eliminarReserva.addEventListener("submit",(e)=>{
+        const dni = e.target.children["dni"].value;
+        const reservas = JSON.parse(localStorage.getItem("reservas"));
+        const index = reservas.findIndex((reserva)=> reserva.dni == dni);
+        if(index != -1){
+            reservas.splice(index,1);
+            localStorage.setItem("reservas",JSON.stringify(reservas));
+            alert("su reserva a sido cancelada exitosamente");
+        }else{
+            alert("el dni ingresado no posee ninguna reserva");
+        }
+    })
+    eliminarReserva.reset();
+}
+
 
 /* ----------------------------------------------------  FIN FUNCIONES  -----------------------------------------------*/
 
@@ -107,6 +114,9 @@ let disponible = true;
 
 verReservas();
 crearReserva();
+console.log(reservas);
+cancelarReserva();
+console.log(reservas)
 
 
 /*--------------------------------------------------   FIN MAIN   ---------------------------------------------------- */

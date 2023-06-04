@@ -16,6 +16,7 @@
 
     <main>
         <form id="crearReserva" class="formulario">
+            <h2>FORMULARIO DE RESERVA</h2>
             <textarea type="text" name="nombre" placeholder="ingrese su nombre para la reserva" required></textarea>
             <textarea type="text" name="apellido" placeholder="ingrese su apellido para la reserva" required></textarea>
 
@@ -54,6 +55,17 @@
             </select>
             <button type="submit">Solicitar Reserva</button>
         </form>
+        <br>
+        <hr>
+        <br>
+        <form id="eliminarReserva" class="formulario">
+            <h2>FORMULARIO DE CANCELACION</h2>
+            <input type="number" name="dni" min="0" max="99999999" placeholder="ingrese su dni para cancelar la reserva" required>
+            <button type="submit">Cancelar Reserva</button>
+        </form>
+        <br>
+        <hr>
+        <br>
 
         <table id="tablaReservas" class="tabla">
             <tr>
