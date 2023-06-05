@@ -14,7 +14,7 @@ class Reserva{
 /* ----------------------------------------------------  FIN CLASES  -----------------------------------------------*/ 
 
 /* ----------------------------------------------------  FUNCIONES  ------------------------------------------------*/  
-// se funcion para crear reservas
+// se crea funcion para crear reservas
 const crearReserva = () =>{
     const crearReserva = document.querySelector("#crearReserva")
     crearReserva.addEventListener("submit",(e)=>{
@@ -25,16 +25,24 @@ const crearReserva = () =>{
         const cancha = e.target.children["cancha"].value;
         const dia = e.target.children["dia"].value;
         const horario = e.target.children["horario"].value;
-    
+        
+        // se verifica que no coincidan las reservas
+        verificarReserva(reservas,dia,horario,cancha)
         // creamos la nueva reserva
-        const reserva = new Reserva(nombre,apellido,dni,cancha,dia,horario)
-        reservas.push(reserva);
-        // lo transferimos al storage
-        localStorage.setItem("reservas",JSON.stringify(reservas));
-        verReserva(reserva);
-    
-        // reseteamos el formulario
-        crearReserva.reset();
+        if(disponible != true){
+            alert("el dia, horario y cancha que selecciono no se encuentra disponible seleccione ingrese la reserva seleccionado nuevas opciones ")
+            // reseteamos el formulario
+            crearReserva.reset();
+            return disponible = true;
+        }else{
+            const reserva = new Reserva(nombre,apellido,dni,cancha,dia,horario)
+            reservas.push(reserva);
+            // lo transferimos al storage
+            localStorage.setItem("reservas",JSON.stringify(reservas));
+            verReserva(reserva);        
+            // reseteamos el formulario
+            crearReserva.reset();
+        }
     })
 }
 
@@ -62,11 +70,11 @@ const verReservas = () =>{
     
 }
 
-/*
-function verificarReserva(reservas,dia,horario){
+// se crea funcion para verificar la coincidencia de reservas
+function verificarReserva(reservas,dia,horario,cancha){
     // se buscan el dia y el horario
     reservas.forEach((reserva)=>{
-        if((reserva.dia == dia) && (reserva.horario == horario)){
+        if((reserva.dia == dia) && (reserva.horario == horario) && (reserva.cancha == cancha)){
             // si el horario ya se encuentra reservado
             alert("el horario ya se encuentra reservado");
             return disponible = false;            
@@ -78,7 +86,7 @@ function verificarReserva(reservas,dia,horario){
     }
     
 }
-*/
+
 // se crea funcion para cancelar la reserva
 const cancelarReserva=()=>{
     const eliminarReserva = document.querySelector("#eliminarReserva");
@@ -103,7 +111,6 @@ const cancelarReserva=()=>{
 /* -------------  VARIABLES  -----------*/  
 
 const reservas = JSON.parse(localStorage.getItem("reservas")) ?? [];
-let continuar = true;
 let disponible = true;
 
 /* ------------  FIN VARIABLES  ---------*/  
@@ -114,9 +121,7 @@ let disponible = true;
 
 verReservas();
 crearReserva();
-console.log(reservas);
 cancelarReserva();
-console.log(reservas)
 
 
 /*--------------------------------------------------   FIN MAIN   ---------------------------------------------------- */
