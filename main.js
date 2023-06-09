@@ -30,7 +30,12 @@ const crearReserva = () =>{
         verificarReserva(reservas,dia,horario,cancha)
         // creamos la nueva reserva
         if(disponible != true){
-            alert("el dia, horario y cancha que selecciono no se encuentra disponible seleccione ingrese la reserva seleccionado nuevas opciones ")
+            Swal.fire({
+                icon: 'error',
+                title: 'RESERVA',
+                text: 'El dia y horario seleccionado ya se encuentra reservado, pruebe nuevamente ingresando un nuevo dia y horario',
+                footer: 'Gracias por utilizar el servicio de reservas de FF5'
+            })
             // reseteamos el formulario
             crearReserva.reset();
             return disponible = true;
@@ -76,12 +81,16 @@ function verificarReserva(reservas,dia,horario,cancha){
     reservas.forEach((reserva)=>{
         if((reserva.dia == dia) && (reserva.horario == horario) && (reserva.cancha == cancha)){
             // si el horario ya se encuentra reservado
-            alert("el horario ya se encuentra reservado");
             return disponible = false;            
         }          
     })
     if(disponible == true){
-        alert("la reserva se a verificado y realizado correctamente");
+        Swal.fire({
+            icon: 'success',
+            title: 'RESERVA',
+            text: 'La reserva se verifico y realizo correctamente',
+            footer: 'Gracias por utilizar el servicio de reservas de FF5'
+        })
         return disponible = true;
     }
     
